@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 
@@ -21,7 +20,6 @@ class BookmarkController extends Controller
         $decoded = json_decode(Cookie::get('article_id'), true);
         $decoded[] = (int)request()->get('id');
         $res = Cookie::make('article_id', json_encode($decoded), 10);
-//        session()->flash('success', 'You Bookmarked An Article');
         return redirect('/')->withCookie($res);
     }
     public function deleteBookmark() {
@@ -31,7 +29,6 @@ class BookmarkController extends Controller
             unset($decoded[$key]);
         }
         $res = Cookie::make('article_id', json_encode($decoded), 10);
-//        session()->flash('success', 'Bookmark deleted');
         return redirect('/bookmarks')->withCookie($res);
     }
 }
